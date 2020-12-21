@@ -1,6 +1,6 @@
 import Tether from './Tether';
-import { useTetherValue } from './ContextProvider';
+import { useTetherValue, getWSUrl } from './ContextProvider';
 import { useTetherListener } from './TetherMessage';
 import { isGsiConnectedMessage } from './State';
 
-export { Tether, useTetherValue, useTetherListener, isGsiConnectedMessage };
+export { getWSUrl, Tether, useTetherValue, useTetherListener, isGsiConnectedMessage };
