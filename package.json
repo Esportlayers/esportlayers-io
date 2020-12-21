@@ -1,9 +1,9 @@
 {
   "name": "@esportlayers/io",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Client implementation listening on esportlayers gsi events",
-  "main": "lib/Tether.js",
-  "types": "lib/Tether.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": "git@github.com:michaelketzer/esportlayers-io.git",
   "author": "Michael Ketzer <46134133+michaelketzer@users.noreply.github.com>",
   "license": "MIT",
