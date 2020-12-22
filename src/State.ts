@@ -20,8 +20,8 @@ export interface GsiConnectedMessage extends BaseMessage {
 
 export type Message = GsiConnectedMessage;
 
-export function isGsiConnectedMessage(msg: Message): msg is GsiConnectedMessage {
-  return msg.type === MessageType.gsi_connected;
+export function isGsiConnectedMessage(msg: Message | null): msg is GsiConnectedMessage {
+  return msg?.type === MessageType.gsi_connected;
 }
 
 interface NewMessageAction {

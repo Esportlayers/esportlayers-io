@@ -1,5 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
-import React = require('react');
+import React, { ReactElement, ReactNode } from 'react';
 import ContextProvider from './ContextProvider';
 import { initialState, reducer } from './State';
 
