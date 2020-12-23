@@ -23,6 +23,14 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
+"@esportlayers/morphling@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@esportlayers/morphling/-/morphling-1.1.1.tgz#02962be071e4bbbeb427e7f402656aa9b06d7b59"
+  integrity sha512-ivNzVP9Q1gPwrS7HaYQCnsIgCb2QvvJh9jfJR7VOeDDoQ/I9pi3bb/qcu+iNcvVVYPfRlvwlzj579tGMYL+OvA==
+  dependencies:
+    dayjs "^1.9.7"
+    lodash "^4.17.20"
+
 "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
@@ -496,7 +504,7 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
-lodash@^4.17.4:
+lodash@^4.17.20, lodash@^4.17.4:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
