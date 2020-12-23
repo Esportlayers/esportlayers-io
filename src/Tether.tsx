@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import ContextProvider from './ContextProvider';
 import { initialState, reducer } from './State';
 
@@ -7,10 +7,10 @@ interface Props {
   url: string;
 }
 
-export default function Tether({ children, url }: Props): ReactElement {
-  return (
-    <ContextProvider initialState={initialState} reducer={reducer} url={url}>
-      {children}
-    </ContextProvider>
-  );
-}
+const Tether: React.FC<Props> = ({ children, url }) => (
+  <ContextProvider initialState={initialState} reducer={reducer} url={url}>
+    {children}
+  </ContextProvider>
+);
+
+export default Tether;
