@@ -55,3 +55,19 @@ export function useTetherListener(): Message | null {
 
   return msg;
 }
+
+type MessageListenerFN<T> = (msg: T) => msg is T;
+
+export function useTetherMessageListener<T = Message>(listenerTypeCheck: MessageListenerFN<T>): T | null {
+  const msg = useTetherListener();
+  const [value, setValue] = useState<T | null>(null);
+
+  useEffect(() => {
+    // @ts-ignore
+    if (msg && listenerTypeCheck(msg)) {
+      setValue(msg);
+    }
+  }, [msg]);
+
+  return value;
+}
