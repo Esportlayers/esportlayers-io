@@ -15,5 +15,5 @@ export default {
     plugins: [
       typescript({ objectHashIgnoreUnknownHack: true })
     ],
-    external: ['react', 'react-dom', 'dayjs', 'react-websocket']
+    external: ['react', 'react-dom', 'dayjs', 'react-websocket', '@esportlayers/morphling']
   }
