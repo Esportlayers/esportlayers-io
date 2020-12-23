@@ -1,6 +1,6 @@
 {
   "name": "@esportlayers/io",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Client implementation listening on esportlayers gsi events",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -30,7 +30,6 @@
     "esportlayers"
   ],
   "devDependencies": {
-    "@esportlayers/morphling": "^1.1.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "babel-core": "^6.26.3",
@@ -49,5 +48,8 @@
   "peerDependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "dependencies": {
+    "@esportlayers/morphling": "^1.1.1"
   }
 }
