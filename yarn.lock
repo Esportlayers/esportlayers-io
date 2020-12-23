@@ -23,10 +23,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@esportlayers/morphling@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@esportlayers/morphling/-/morphling-1.1.1.tgz#02962be071e4bbbeb427e7f402656aa9b06d7b59"
-  integrity sha512-ivNzVP9Q1gPwrS7HaYQCnsIgCb2QvvJh9jfJR7VOeDDoQ/I9pi3bb/qcu+iNcvVVYPfRlvwlzj579tGMYL+OvA==
+"@esportlayers/morphling@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@esportlayers/morphling/-/morphling-1.1.2.tgz#e6f71bb1a345d9db792ba473a887fb963c1cebd5"
+  integrity sha512-+7XRjFXMAYKf1MXAeDekwHOa7+gAwRUGQbqHRb+wMpWKxcIYyom5SpsOvA9OlRtGIMlvxDBgKcCqwK0PXYF8uA==
   dependencies:
     dayjs "^1.9.7"
     lodash "^4.17.20"
