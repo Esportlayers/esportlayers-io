@@ -58,6 +58,10 @@ export interface GsiDraftMessage extends BaseMessage {
   type: MorphlingEventTypes.gsi_draft;
   value: DraftData | null;
 }
+export interface GsiMatchIdMessage extends BaseMessage {
+  type: MorphlingEventTypes.gsi_match_id;
+  value: DraftData | null;
+}
 
 export type Message =
   | GsiConnectedMessage
@@ -70,7 +74,8 @@ export type Message =
   | GsiGameWinChanceMessage
   | GsiPlayerStateMessage
   | GsiRoshanMessage
-  | GsiDraftMessage;
+  | GsiDraftMessage
+  | GsiMatchIdMessage;
 
 export function isGsiConnectedMessage(msg: Message | null): msg is GsiConnectedMessage {
   return msg?.type === MorphlingEventTypes.gsi_connected;
@@ -114,6 +119,10 @@ export function isGsiRoshanMessage(msg: Message | null): msg is GsiRoshanMessage
 
 export function isGsiDraftMessage(msg: Message | null): msg is GsiDraftMessage {
   return msg?.type === MorphlingEventTypes.gsi_draft;
+}
+
+export function isGsiMatchIdMessage(msg: Message | null): msg is GsiMatchIdMessage {
+  return msg?.type === MorphlingEventTypes.gsi_match_id;
 }
 
 interface NewMessageAction {
