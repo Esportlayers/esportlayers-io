@@ -4,8 +4,6 @@ export * from './ContextProvider';
 export * from './State';
 export * from './Vote/VoteState';
 
-export {
-    Wisp,
-};
+export { Wisp };
 
 export default Tether;
