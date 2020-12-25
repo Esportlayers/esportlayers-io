@@ -1,12 +1,12 @@
 import React, { createContext, Dispatch, ReactElement, ReactNode, useContext, useEffect, useReducer } from 'react';
-import { newState, State } from './VoteState';
+import { newState, VoteState } from './VoteState';
 import Tether from './../Tether';
 import { useTetherMessageListener } from '../ContextProvider';
 import { BettingMessage, isBettingMessage } from '../State';
 
 export const VoteContext = createContext({});
 
-export const useVoteValue = (): [State, Dispatch<{}>] => useContext(VoteContext) as [State, Dispatch<{}>];
+export const useVoteValue = (): [VoteState, Dispatch<{}>] => useContext(VoteContext) as [VoteState, Dispatch<{}>];
 
 interface Props {
   children: ReactNode;

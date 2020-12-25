@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import VoteContext from './Vote/VoteContext';
-import { reducer, initialState } from './Vote/VoteState';
+import { voteReducer, initialVoteState } from './Vote/VoteState';
 
 interface Props {
   children: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Wisp: React.FC<Props> = ({ children, url }) => (
-  <VoteContext initialState={initialState} reducer={reducer} url={url}>
+  <VoteContext initialState={initialVoteState} reducer={voteReducer} url={url}>
     {children}
   </VoteContext>
 );

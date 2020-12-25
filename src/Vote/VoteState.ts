@@ -27,18 +27,18 @@ enum ACTIONS {
 
 interface UpdateVoteState {
   type: typeof ACTIONS.UPDATE_VOTE_STATE;
-  state: VoteRoundData;
-}
-
-export interface State {
   state: VoteRoundData | null;
 }
 
-export const initialState: State = {
+export interface VoteState {
+  state: VoteRoundData | null;
+}
+
+export const initialVoteState: VoteState = {
   state: null,
 };
 
-export const reducer = (state: State, action: UpdateVoteState) => {
+export const voteReducer = (state: VoteState, action: UpdateVoteState) => {
   switch (action.type) {
     case ACTIONS.UPDATE_VOTE_STATE:
       return action.state;
@@ -47,7 +47,7 @@ export const reducer = (state: State, action: UpdateVoteState) => {
   }
 };
 
-export function newState(state: VoteRoundData): UpdateVoteState {
+export function newState(state: VoteRoundData | null): UpdateVoteState {
   return {
     state,
     type: ACTIONS.UPDATE_VOTE_STATE,
