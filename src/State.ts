@@ -12,6 +12,7 @@ enum EventTypes {
   gsi_game_activity = 'gsi_game_activity',
   gsi_draft = 'gsi_draft',
   gsi_player_state = 'gsi_player_state',
+  gsi_players_state = 'gsi_players_state',
   gsi_roshan = 'gsi_roshan',
   gsi_connected = 'gsi_connected',
   gsi_match_id = 'gsi_match_id',
@@ -62,6 +63,10 @@ export interface GsiGameWinChanceMessage extends BaseMessage {
 }
 export interface GsiPlayerStateMessage extends BaseMessage {
   type: EventTypes.gsi_player_state;
+  value: PlayerState;
+}
+export interface GsiPlayersStateMessage extends BaseMessage {
+  type: EventTypes.gsi_players_state;
   value: PlayerState[];
 }
 export interface GsiRoshanMessage extends BaseMessage {
@@ -94,6 +99,7 @@ export type Message =
   | GsiGameWinnerMessage
   | GsiGameWinChanceMessage
   | GsiPlayerStateMessage
+  | GsiPlayersStateMessage
   | GsiRoshanMessage
   | GsiDraftMessage
   | GsiMatchIdMessage
@@ -133,6 +139,10 @@ export function isGsiGameWinChanceMessage(msg: Message | null): msg is GsiGameWi
 
 export function isGsiGamePlayerMessage(msg: Message | null): msg is GsiPlayerStateMessage {
   return msg?.type === EventTypes.gsi_player_state;
+}
+
+export function isGsiGamePlayersMessage(msg: Message | null): msg is GsiPlayersStateMessage {
+  return msg?.type === EventTypes.gsi_players_state;
 }
 
 export function isGsiRoshanMessage(msg: Message | null): msg is GsiRoshanMessage {
