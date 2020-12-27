@@ -103,5 +103,5 @@ export function useTetherMessageListener<T = Message>(type: EventTypes): T | nul
     }
   }, [msg]);
 
-  return value || lastMessages[type];
+  return value || (({ value: lastMessages[type], type } as unknown) as T);
 }
