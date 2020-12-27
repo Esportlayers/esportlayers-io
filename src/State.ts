@@ -187,7 +187,7 @@ export const reducer = (state: State, action: NewMessageAction) => {
         lastMessages: {
           ...state.lastMessages,
           [action.type]: action.message.value,
-        }
+        },
       };
     default:
       return state;

@@ -1,5 +1,24 @@
 import React, { createContext, Dispatch, ReactElement, useContext, useEffect, useReducer, useState } from 'react';
-import { EventTypes, isBettingMessage, isGsiActivityMessage, isGsiAegisMessage, isGsiConnectedMessage, isGsiDraftMessage, isGsiGameDataMessage, isGsiGamePausedMessage, isGsiGamePlayerMessage, isGsiGamePlayersMessage, isGsiGameStateMessage, isGsiGameWinChanceMessage, isGsiGameWinnerMessage, isGsiMatchIdMessage, isGsiRoshanMessage, Message, newMessage, State } from './State';
+import {
+  EventTypes,
+  isBettingMessage,
+  isGsiActivityMessage,
+  isGsiAegisMessage,
+  isGsiConnectedMessage,
+  isGsiDraftMessage,
+  isGsiGameDataMessage,
+  isGsiGamePausedMessage,
+  isGsiGamePlayerMessage,
+  isGsiGamePlayersMessage,
+  isGsiGameStateMessage,
+  isGsiGameWinChanceMessage,
+  isGsiGameWinnerMessage,
+  isGsiMatchIdMessage,
+  isGsiRoshanMessage,
+  Message,
+  newMessage,
+  State,
+} from './State';
 // @ts-ignore
 import Websocket from 'react-websocket';
 
@@ -71,7 +90,7 @@ const listener = {
   [EventTypes.gsi_player_state]: isGsiGamePlayerMessage,
   [EventTypes.gsi_players_state]: isGsiGamePlayersMessage,
   [EventTypes.gsi_roshan]: isGsiRoshanMessage,
-}
+};
 
 export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
   const msg = useTetherListener();
@@ -80,7 +99,7 @@ export function useTetherMessageListener<T = Message>(type: EventTypes): T | nul
 
   useEffect(() => {
     if (msg && listener[type](msg)) {
-      setValue(msg as unknown as T);
+      setValue((msg as unknown) as T);
     }
   }, [msg]);
 
