@@ -2,7 +2,7 @@ import { DraftData, GameData, GameState, PlayerState } from '@esportlayers/morph
 import dayjs from 'dayjs';
 import { VoteRoundData } from './Vote/VoteState';
 
-enum EventTypes {
+export enum EventTypes {
   gsi_aegis_available = 'gsi_aegis_available',
   gsi_gamedata = 'gsi_gamedata',
   gsi_game_paused = 'gsi_game_paused',
@@ -168,10 +168,14 @@ interface NewMessageAction {
 
 export interface State {
   messages: Message[];
+  lastMessages: {
+    [x: string]: any;
+  };
 }
 
 export const initialState: State = {
   messages: [],
+  lastMessages: {},
 };
 
 export const reducer = (state: State, action: NewMessageAction) => {
@@ -180,6 +184,10 @@ export const reducer = (state: State, action: NewMessageAction) => {
       return {
         ...state,
         messages: [...state.messages, action.message],
+        lastMessages: {
+          ...state.lastMessages,
+          [action.type]: action.message.value,
+        }
       };
     default:
       return state;

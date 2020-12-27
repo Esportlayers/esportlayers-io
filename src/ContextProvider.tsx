@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, ReactElement, useContext, useEffect, useReducer, useState } from 'react';
-import { Message, newMessage, State } from './State';
+import { EventTypes, isBettingMessage, isGsiActivityMessage, isGsiAegisMessage, isGsiConnectedMessage, isGsiDraftMessage, isGsiGameDataMessage, isGsiGamePausedMessage, isGsiGamePlayerMessage, isGsiGamePlayersMessage, isGsiGameStateMessage, isGsiGameWinChanceMessage, isGsiGameWinnerMessage, isGsiMatchIdMessage, isGsiRoshanMessage, Message, newMessage, State } from './State';
 // @ts-ignore
 import Websocket from 'react-websocket';
 
@@ -56,16 +56,31 @@ export function useTetherListener(): Message | null {
   return msg;
 }
 
-type MessageListenerFN<T> = (msg: T) => msg is T;
+const listener = {
+  [EventTypes.betting_v2]: isBettingMessage,
+  [EventTypes.gsi_aegis_available]: isGsiAegisMessage,
+  [EventTypes.gsi_connected]: isGsiConnectedMessage,
+  [EventTypes.gsi_draft]: isGsiDraftMessage,
+  [EventTypes.gsi_game_activity]: isGsiActivityMessage,
+  [EventTypes.gsi_game_paused]: isGsiGamePausedMessage,
+  [EventTypes.gsi_game_state]: isGsiGameStateMessage,
+  [EventTypes.gsi_game_win_chance]: isGsiGameWinChanceMessage,
+  [EventTypes.gsi_game_winner]: isGsiGameWinnerMessage,
+  [EventTypes.gsi_gamedata]: isGsiGameDataMessage,
+  [EventTypes.gsi_match_id]: isGsiMatchIdMessage,
+  [EventTypes.gsi_player_state]: isGsiGamePlayerMessage,
+  [EventTypes.gsi_players_state]: isGsiGamePlayersMessage,
+  [EventTypes.gsi_roshan]: isGsiRoshanMessage,
+}
 
-export function useTetherMessageListener<T = Message>(listenerTypeCheck: MessageListenerFN<T>): T | null {
+export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
   const msg = useTetherListener();
-  const [value, setValue] = useState<T | null>(null);
+  const [{ lastMessages }] = useTetherValue();
+  const [value, setValue] = useState<T | null>(lastMessages[type] ?? null);
 
   useEffect(() => {
-    // @ts-ignore
-    if (msg && listenerTypeCheck(msg)) {
-      setValue(msg);
+    if (msg && listener[type](msg)) {
+      setValue(msg as unknown as T);
     }
   }, [msg]);
 
