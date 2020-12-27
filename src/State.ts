@@ -82,7 +82,7 @@ export interface GsiDraftMessage extends BaseMessage {
 }
 export interface GsiMatchIdMessage extends BaseMessage {
   type: EventTypes.gsi_match_id;
-  value: DraftData | null;
+  value: number | null;
 }
 export interface BettingMessage extends BaseMessage {
   type: EventTypes.betting_v2;
