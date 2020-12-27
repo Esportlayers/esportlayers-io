@@ -95,7 +95,7 @@ const listener = {
 export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
   const msg = useTetherListener();
   const [{ lastMessages }] = useTetherValue();
-  const [value, setValue] = useState<T | null>(lastMessages[type] ?? null);
+  const [value, setValue] = useState<T | null>(null);
 
   useEffect(() => {
     if (msg && listener[type](msg)) {
@@ -103,5 +103,5 @@ export function useTetherMessageListener<T = Message>(type: EventTypes): T | nul
     }
   }, [msg]);
 
-  return value;
+  return value || lastMessages[type];
 }
