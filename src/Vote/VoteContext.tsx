@@ -2,7 +2,7 @@ import React, { createContext, Dispatch, ReactElement, ReactNode, useContext, us
 import { newState, VoteState } from './VoteState';
 import Tether from './../Tether';
 import { useTetherMessageListener } from '../ContextProvider';
-import { BettingMessage, isBettingMessage } from '../State';
+import { BettingMessage, EventTypes } from '../State';
 
 export const VoteContext = createContext({});
 
@@ -14,7 +14,7 @@ interface Props {
 
 function VoteUpdateListener({ children }: Props): ReactElement {
   const [, dispatch] = useVoteValue();
-  const { value } = useTetherMessageListener<BettingMessage>(isBettingMessage) || { value: null };
+  const { value } = useTetherMessageListener<BettingMessage>(EventTypes.betting_v2) || { value: null };
   useEffect(() => dispatch(newState(value)), [dispatch, value]);
   return <>{children}</>;
 }
