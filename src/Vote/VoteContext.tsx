@@ -20,7 +20,7 @@ function VoteUpdateListener({ children }: Props): ReactElement {
 }
 
 // @ts-ignore
-export const ContextProvider = ({ reducer, initialState, children, url }) => {
+export const VoteContextProvider = ({ reducer, initialState, children, url }) => {
   return (
     <Tether url={url}>
       <VoteContext.Provider value={useReducer(reducer, initialState)}>
@@ -29,4 +29,4 @@ export const ContextProvider = ({ reducer, initialState, children, url }) => {
     </Tether>
   );
 };
-export default ContextProvider;
+export default VoteContextProvider;
