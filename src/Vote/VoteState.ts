@@ -30,13 +30,9 @@ interface UpdateVoteState {
   state: VoteRoundData | null;
 }
 
-export interface VoteState {
-  state: VoteRoundData | null;
-}
+export type VoteState = VoteRoundData | null;
 
-export const initialVoteState: VoteState = {
-  state: null,
-};
+export const initialVoteState: VoteState = null;
 
 export const voteReducer = (state: VoteState, action: UpdateVoteState) => {
   switch (action.type) {
