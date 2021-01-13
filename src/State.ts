@@ -173,7 +173,7 @@ export function isBettingMessage(msg: Message | null): msg is BettingMessage {
   return msg?.type === EventTypes.betting_v2;
 }
 
-export function isKeyowrdMessage(msg: Message | null): msg is KeywordMessage {
+export function isKeywordMessage(msg: Message | null): msg is KeywordMessage {
   return msg?.type === EventTypes.keyword_message;
 }
 

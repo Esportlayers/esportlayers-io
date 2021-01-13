@@ -15,6 +15,7 @@ import {
   isGsiGameWinnerMessage,
   isGsiMatchIdMessage,
   isGsiRoshanMessage,
+  isKeywordMessage,
   Message,
   newMessage,
   State,
@@ -90,6 +91,7 @@ const listener = {
   [EventTypes.gsi_player_state]: isGsiGamePlayerMessage,
   [EventTypes.gsi_players_state]: isGsiGamePlayersMessage,
   [EventTypes.gsi_roshan]: isGsiRoshanMessage,
+  [EventTypes.keyword_message]: isKeywordMessage,
 };
 
 export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
