@@ -17,6 +17,7 @@ export enum EventTypes {
   gsi_connected = 'gsi_connected',
   gsi_match_id = 'gsi_match_id',
   betting_v2 = 'betting_v2',
+  keyword_message = 'keyword_message',
 }
 
 enum ACTIONS {
@@ -89,6 +90,16 @@ export interface BettingMessage extends BaseMessage {
   value: VoteRoundData | null;
 }
 
+export interface KeywordMessage extends BaseMessage {
+  type: EventTypes.keyword_message;
+  value: {
+    message: string;
+    name: string;
+    logo: string;
+    time: number;
+  };
+}
+
 export type Message =
   | GsiConnectedMessage
   | GsiAegisInfoMessage
@@ -103,7 +114,8 @@ export type Message =
   | GsiRoshanMessage
   | GsiDraftMessage
   | GsiMatchIdMessage
-  | BettingMessage;
+  | BettingMessage
+  | KeywordMessage;
 
 export function isGsiConnectedMessage(msg: Message | null): msg is GsiConnectedMessage {
   return msg?.type === EventTypes.gsi_connected;
@@ -159,6 +171,10 @@ export function isGsiMatchIdMessage(msg: Message | null): msg is GsiMatchIdMessa
 
 export function isBettingMessage(msg: Message | null): msg is BettingMessage {
   return msg?.type === EventTypes.betting_v2;
+}
+
+export function isKeyowrdMessage(msg: Message | null): msg is KeywordMessage {
+  return msg?.type === EventTypes.keyword_message;
 }
 
 interface NewMessageAction {
