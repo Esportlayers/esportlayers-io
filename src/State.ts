@@ -18,6 +18,9 @@ export enum EventTypes {
   gsi_match_id = 'gsi_match_id',
   betting_v2 = 'betting_v2',
   keyword_message = 'keyword_message',
+  overlay = 'overlay',
+  dota_wl_reset = 'dota_wl_reset',
+  statsoverlay = 'statsoverlay',
 }
 
 enum ACTIONS {
@@ -90,6 +93,54 @@ export interface BettingMessage extends BaseMessage {
   value: VoteRoundData | null;
 }
 
+export interface OverlayMessage extends BaseMessage {
+  type: EventTypes.overlay;
+  value: boolean;
+}
+
+export interface DotaWLResetMessage extends BaseMessage {
+  type: EventTypes.dota_wl_reset;
+  value: boolean;
+}
+
+
+export enum StatsOverlayMessages {
+  heroStats = 'heroStats',
+  playerCompareGraph = 'playerCompareGraph'
+}
+export interface BaseStatsOverlayMessage {
+  type: StatsOverlayMessages;
+}
+
+export interface HeroStatsOverlayValue extends BaseStatsOverlayMessage {
+  type: StatsOverlayMessages.heroStats;
+  heroId: number;
+  heroClass: string;
+  totalGamesCount: number;
+  matchCount: number;
+  matchWins: number;
+  banCount: number;
+}
+
+export interface PlayerCompareGraphValue extends BaseStatsOverlayMessage {
+  StatsOverlayMessages: StatsOverlayMessages.playerCompareGraph;
+  dataType: 'net_worth' | 'xpm' | 'gpm' | 'hero_damage' | 'runes_activated' | 'camps_stacked' | 'support_gold_spent'
+  data: Array<{absolute: number; percentage: number}>;
+}
+
+export interface StatsOverlayMessage extends BaseMessage {
+  type: EventTypes.statsoverlay;
+  value: HeroStatsOverlayValue |PlayerCompareGraphValue;
+}
+
+export function isHeroStatsOverlayMessage(value: StatsOverlayMessage['value']): value is HeroStatsOverlayValue {
+  return value.type === StatsOverlayMessages.heroStats;
+}
+
+export function isPlayerCompareGraphMessage(value: StatsOverlayMessage['value']): value is PlayerCompareGraphValue {
+  return value.type === StatsOverlayMessages.playerCompareGraph;
+}
+
 export interface KeywordMessage extends BaseMessage {
   type: EventTypes.keyword_message;
   value: {
@@ -115,7 +166,10 @@ export type Message =
   | GsiDraftMessage
   | GsiMatchIdMessage
   | BettingMessage
-  | KeywordMessage;
+  | KeywordMessage
+  | OverlayMessage 
+  | DotaWLResetMessage
+  | StatsOverlayMessage;
 
 export function isGsiConnectedMessage(msg: Message | null): msg is GsiConnectedMessage {
   return msg?.type === EventTypes.gsi_connected;
@@ -174,6 +228,18 @@ export function isBettingMessage(msg: Message | null): msg is BettingMessage {
 }
 
 export function isKeywordMessage(msg: Message | null): msg is KeywordMessage {
+  return msg?.type === EventTypes.keyword_message;
+}
+
+export function isOverlayMessage(msg: Message | null): msg is OverlayMessage {
+  return msg?.type === EventTypes.overlay;
+}
+
+export function isDotaWLResetMessage(msg: Message | null): msg is DotaWLResetMessage {
+  return msg?.type === EventTypes.dota_wl_reset;
+}
+
+export function isStatsOverlayMessage(msg: Message | null): msg is StatsOverlayMessage {
   return msg?.type === EventTypes.keyword_message;
 }
 
