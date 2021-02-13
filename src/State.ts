@@ -103,10 +103,9 @@ export interface DotaWLResetMessage extends BaseMessage {
   value: boolean;
 }
 
-
 export enum StatsOverlayMessages {
   heroStats = 'heroStats',
-  playerCompareGraph = 'playerCompareGraph'
+  playerCompareGraph = 'playerCompareGraph',
 }
 export interface BaseStatsOverlayMessage {
   type: StatsOverlayMessages;
@@ -124,13 +123,13 @@ export interface HeroStatsOverlayValue extends BaseStatsOverlayMessage {
 
 export interface PlayerCompareGraphValue extends BaseStatsOverlayMessage {
   StatsOverlayMessages: StatsOverlayMessages.playerCompareGraph;
-  dataType: 'net_worth' | 'xpm' | 'gpm' | 'hero_damage' | 'runes_activated' | 'camps_stacked' | 'support_gold_spent'
-  data: Array<{absolute: number; percentage: number}>;
+  dataType: 'net_worth' | 'xpm' | 'gpm' | 'hero_damage' | 'runes_activated' | 'camps_stacked' | 'support_gold_spent';
+  data: { absolute: number; percentage: number }[];
 }
 
 export interface StatsOverlayMessage extends BaseMessage {
   type: EventTypes.statsoverlay;
-  value: HeroStatsOverlayValue |PlayerCompareGraphValue;
+  value: HeroStatsOverlayValue | PlayerCompareGraphValue;
 }
 
 export function isHeroStatsOverlayMessage(value: StatsOverlayMessage['value']): value is HeroStatsOverlayValue {
@@ -167,7 +166,7 @@ export type Message =
   | GsiMatchIdMessage
   | BettingMessage
   | KeywordMessage
-  | OverlayMessage 
+  | OverlayMessage
   | DotaWLResetMessage
   | StatsOverlayMessage;
 
