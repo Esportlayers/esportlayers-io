@@ -2,6 +2,7 @@ import React, { createContext, Dispatch, ReactElement, useContext, useEffect, us
 import {
   EventTypes,
   isBettingMessage,
+  isDotaWLResetMessage,
   isGsiActivityMessage,
   isGsiAegisMessage,
   isGsiConnectedMessage,
@@ -16,6 +17,8 @@ import {
   isGsiMatchIdMessage,
   isGsiRoshanMessage,
   isKeywordMessage,
+  isOverlayMessage,
+  isStatsOverlayMessage,
   Message,
   newMessage,
   State,
@@ -92,6 +95,9 @@ const listener = {
   [EventTypes.gsi_players_state]: isGsiGamePlayersMessage,
   [EventTypes.gsi_roshan]: isGsiRoshanMessage,
   [EventTypes.keyword_message]: isKeywordMessage,
+  [EventTypes.overlay]: isOverlayMessage,
+  [EventTypes.dota_wl_reset]: isDotaWLResetMessage,
+  [EventTypes.statsoverlay]: isStatsOverlayMessage,
 };
 
 export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
