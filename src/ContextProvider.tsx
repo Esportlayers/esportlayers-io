@@ -1,6 +1,7 @@
-import React, { createContext, Dispatch, ReactElement, useContext, useEffect, useReducer, useState } from 'react';
 import {
   EventTypes,
+  Message,
+  State,
   isBettingMessage,
   isDotaWLResetMessage,
   isGsiActivityMessage,
@@ -17,12 +18,13 @@ import {
   isGsiMatchIdMessage,
   isGsiRoshanMessage,
   isKeywordMessage,
+  isKeywordMessageOverlay,
   isOverlayMessage,
   isStatsOverlayMessage,
-  Message,
   newMessage,
-  State,
 } from './State';
+import React, { Dispatch, ReactElement, createContext, useContext, useEffect, useReducer, useState } from 'react';
+
 // @ts-ignore
 import Websocket from 'react-websocket';
 
@@ -95,6 +97,7 @@ const listener = {
   [EventTypes.gsi_players_state]: isGsiGamePlayersMessage,
   [EventTypes.gsi_roshan]: isGsiRoshanMessage,
   [EventTypes.keyword_message]: isKeywordMessage,
+  [EventTypes.keyword_message_overlay]: isKeywordMessageOverlay,
   [EventTypes.overlay]: isOverlayMessage,
   [EventTypes.dota_wl_reset]: isDotaWLResetMessage,
   [EventTypes.statsoverlay]: isStatsOverlayMessage,

@@ -1,6 +1,7 @@
 import { DraftData, GameData, GameState, PlayerState } from '@esportlayers/morphling';
-import dayjs from 'dayjs';
+
 import { VoteRoundData } from './Vote/VoteState';
+import dayjs from 'dayjs';
 
 export enum EventTypes {
   gsi_aegis_available = 'gsi_aegis_available',
@@ -18,6 +19,7 @@ export enum EventTypes {
   gsi_match_id = 'gsi_match_id',
   betting_v2 = 'betting_v2',
   keyword_message = 'keyword_message',
+  keyword_message_overlay = 'keyword_message_overlay',
   overlay = 'overlay',
   dota_wl_reset = 'dota_wl_reset',
   statsoverlay = 'statsoverlay',
@@ -150,6 +152,16 @@ export interface KeywordMessage extends BaseMessage {
   };
 }
 
+export interface KeywordMessageOverlay extends BaseMessage {
+  type: EventTypes.keyword_message_overlay;
+  value: {
+    message: string;
+    name: string;
+    logo: string;
+    time: number;
+  };
+}
+
 export type Message =
   | GsiConnectedMessage
   | GsiAegisInfoMessage
@@ -168,7 +180,8 @@ export type Message =
   | KeywordMessage
   | OverlayMessage
   | DotaWLResetMessage
-  | StatsOverlayMessage;
+  | StatsOverlayMessage
+  | KeywordMessageOverlay;
 
 export function isGsiConnectedMessage(msg: Message | null): msg is GsiConnectedMessage {
   return msg?.type === EventTypes.gsi_connected;
@@ -228,6 +241,10 @@ export function isBettingMessage(msg: Message | null): msg is BettingMessage {
 
 export function isKeywordMessage(msg: Message | null): msg is KeywordMessage {
   return msg?.type === EventTypes.keyword_message;
+}
+
+export function isKeywordMessageOverlay(msg: Message | null): msg is KeywordMessageOverlay {
+  return msg?.type === EventTypes.keyword_message_overlay;
 }
 
 export function isOverlayMessage(msg: Message | null): msg is OverlayMessage {
