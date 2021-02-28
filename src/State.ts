@@ -159,6 +159,7 @@ export interface KeywordMessageOverlay extends BaseMessage {
     name: string;
     logo: string;
     time: number;
+    keyword: string;
   };
 }
 
