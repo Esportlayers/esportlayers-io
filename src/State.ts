@@ -124,7 +124,7 @@ export interface HeroStatsOverlayValue extends BaseStatsOverlayMessage {
 }
 
 export interface PlayerCompareGraphValue extends BaseStatsOverlayMessage {
-  StatsOverlayMessages: StatsOverlayMessages.playerCompareGraph;
+  type: StatsOverlayMessages.playerCompareGraph;
   dataType: 'net_worth' | 'xpm' | 'gpm' | 'hero_damage' | 'runes_activated' | 'camps_stacked' | 'support_gold_spent';
   data: { absolute: number; percentage: number }[];
 }
