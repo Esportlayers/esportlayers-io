@@ -266,14 +266,14 @@ interface NewMessageAction {
 }
 
 export interface State {
-  messages: Message[];
+  message: Message | null;
   lastMessages: {
     [x: string]: any;
   };
 }
 
 export const initialState: State = {
-  messages: [],
+  message: null,
   lastMessages: {},
 };
 
@@ -282,7 +282,7 @@ export const reducer = (state: State, action: NewMessageAction) => {
     case ACTIONS.NEW_MESSAGE:
       return {
         ...state,
-        messages: [...state.messages, action.message],
+        message: action.message,
         lastMessages: {
           ...state.lastMessages,
           [action.message.type]: action.message.value,

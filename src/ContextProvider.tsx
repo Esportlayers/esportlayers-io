@@ -62,23 +62,23 @@ export function MessageHandler({ url }: { url: string }): ReactElement {
       dispatch(newMessage({ ...props, type }));
     } catch (Error) {
       // tslint:disable-next-line
-      console.error('Invalid websocket message', msg);
+      throw new Error('MessageHandler :: Invalid message - ', msg);
     }
   };
-  return <Websocket url={url} onMessage={onMessage} />;
+  return (
+    <Websocket
+      url={url}
+      onMessage={onMessage}
+      onClose={(evt: CloseEvent) => {
+        throw new Error(`MessageHandler :: Disconnected - Reason: ${evt.reason}, Code:  ${evt.code}`);
+      }}
+    />
+  );
 }
 
 export function useTetherListener(): Message | null {
-  const [{ messages }] = useTetherValue();
-  const [msg, setMsg] = useState<Message | null>(messages.length > 0 ? messages.slice(-1)[0] : null);
-
-  useEffect(() => {
-    const lastMessage = messages.slice(-1);
-    const message = lastMessage.length > 0 ? lastMessage[0] : null;
-    setMsg(message);
-  }, [messages]);
-
-  return msg;
+  const [{ message }] = useTetherValue();
+  return message;
 }
 
 const listener = {
