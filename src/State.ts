@@ -257,7 +257,7 @@ export function isDotaWLResetMessage(msg: Message | null): msg is DotaWLResetMes
 }
 
 export function isStatsOverlayMessage(msg: Message | null): msg is StatsOverlayMessage {
-  return msg?.type === EventTypes.keyword_message;
+  return msg?.type === EventTypes.statsoverlay;
 }
 
 interface NewMessageAction {
