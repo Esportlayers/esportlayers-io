@@ -109,6 +109,10 @@ export function useTetherMessageListener<T = Message>(type: EventTypes, noCache?
   const [value, setValue] = useState<T | null>(null);
 
   useEffect(() => {
+    if (msg && !msg.type.includes('gsi')) {
+      // tslint:disable-next-line
+      console.log(type, msg.type, listener[type](msg));
+    }
     if (msg && listener[type](msg)) {
       setValue((msg as unknown) as T);
     }
