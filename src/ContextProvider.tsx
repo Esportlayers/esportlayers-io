@@ -103,7 +103,7 @@ const listener = {
   [EventTypes.statsoverlay]: isStatsOverlayMessage,
 };
 
-export function useTetherMessageListener<T = Message>(type: EventTypes): T | null {
+export function useTetherMessageListener<T = Message>(type: EventTypes, noCache?: boolean): T | null {
   const msg = useTetherListener();
   const [{ lastMessages }] = useTetherValue();
   const [value, setValue] = useState<T | null>(null);
@@ -114,5 +114,11 @@ export function useTetherMessageListener<T = Message>(type: EventTypes): T | nul
     }
   }, [msg]);
 
-  return value || (({ value: lastMessages[type], type } as unknown) as T);
+  let val = value;
+
+  if (!noCache && !val) {
+    val = ({ value: lastMessages[type], type } as unknown) as T;
+  }
+
+  return val;
 }
