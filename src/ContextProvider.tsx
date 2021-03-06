@@ -65,15 +65,7 @@ export function MessageHandler({ url }: { url: string }): ReactElement {
       throw new Error('MessageHandler :: Invalid message - ', msg);
     }
   };
-  return (
-    <Websocket
-      url={url}
-      onMessage={onMessage}
-      onClose={(evt: CloseEvent) => {
-        throw new Error(`MessageHandler :: Disconnected - Reason: ${evt.reason}, Code:  ${evt.code}`);
-      }}
-    />
-  );
+  return <Websocket url={url} onMessage={onMessage} />;
 }
 
 export function useTetherListener(): Message | null {
