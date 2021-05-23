@@ -57,6 +57,10 @@ export function MessageHandler({ url }: { url: string }): ReactElement | null {
   const [, dispatch] = useTetherValue();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(false);
+    setTimeout(() => setMounted(true), 1);
+  }, [url]);
 
   const onMessage = (msg: string) => {
     try {
