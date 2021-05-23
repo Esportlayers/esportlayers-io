@@ -53,8 +53,10 @@ export default ContextProvider;
 
 export const useTetherValue = (): [State, Dispatch<{}>] => useContext(TetherContext) as [State, Dispatch<{}>];
 
-export function MessageHandler({ url }: { url: string }): ReactElement {
+export function MessageHandler({ url }: { url: string }): ReactElement | null {
   const [, dispatch] = useTetherValue();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const onMessage = (msg: string) => {
     try {
@@ -65,7 +67,12 @@ export function MessageHandler({ url }: { url: string }): ReactElement {
       throw new Error('MessageHandler :: Invalid message - ', msg);
     }
   };
-  return <Websocket url={url} onMessage={onMessage} />;
+
+  if (mounted) {
+    return <Websocket url={url} onMessage={onMessage} />;
+  }
+
+  return null;
 }
 
 export function useTetherListener(): Message | null {
