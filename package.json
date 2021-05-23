@@ -1,6 +1,6 @@
 {
   "name": "@esportlayers/io",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Client implementation listening on esportlayers gsi events",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
