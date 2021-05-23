@@ -69,7 +69,7 @@ export function MessageHandler({ url }: { url: string }): ReactElement | null {
   };
 
   if (mounted) {
-    return <Websocket url={url} onMessage={onMessage} />;
+    return <Websocket key={url} url={url} onMessage={onMessage} />;
   }
 
   return null;
